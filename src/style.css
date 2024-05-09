@@ -1,0 +1,26 @@
+* {
+  color: rgb(32, 32, 32);
+}
+
+.workout-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.workout-card {
+  border: 2px solid rgb(32, 32, 32);
+  box-shadow: 0px 5px 5px rgb(32, 32, 32);
+  margin: 2rem;
+  padding: 1rem 2rem;
+}
+
+.workout-info {
+  display: inline-flex;
+  gap: 1rem;
+  margin: 0;
+}
+
+.workout-title {
+  font-size: 1.7rem;
+  margin: 0.3rem 0 1rem;
+}
