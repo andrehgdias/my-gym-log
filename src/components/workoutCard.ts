@@ -1,17 +1,26 @@
 import m from 'mithril';
 import WorkoutDetails from './workoutDetails';
+import { Workout } from './workoutList';
 
-const WorkoutCard = {
-  view: function () {
-    return m('li.workout-card', [
-      m('p.workout-info', [
-        m('span.date', '09.05.24'),
-        m('span.duration', '55 min'),
-      ]),
-      m('h2.workout-title', 'Chest + Triceps'),
-      m(WorkoutDetails),
-    ]);
-  },
+type TWorkoutCardData = {
+  attrs: { workout: Workout };
 };
+
+function WorkoutCard(initialVnode: m.Vnode & TWorkoutCardData): m.Component {
+  const workout: Workout = initialVnode.attrs.workout;
+
+  return {
+    view: function (vnode: m.Vnode) {
+      return m('li.workout-card', { key: 'workout-index' }, [
+        m('p.workout-info', [
+          m('span.date', workout.date.toLocaleDateString()),
+          m('span.duration', `${workout.duration} min`),
+        ]),
+        m('h2.workout-title', workout.exercisesSeries[0].exerciseClass),
+        m(WorkoutDetails, { exercisesSeries: workout.exercisesSeries }),
+      ]);
+    },
+  };
+}
 
 export default WorkoutCard;
