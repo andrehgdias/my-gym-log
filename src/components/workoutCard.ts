@@ -3,14 +3,16 @@ import WorkoutDetails from './workoutDetails';
 import { Workout } from './workoutList';
 
 type TWorkoutCardData = {
-  attrs: { workout: Workout };
+  workout: Workout;
 };
 
-function WorkoutCard(initialVnode: m.Vnode & TWorkoutCardData): m.Component {
-  const workout: Workout = initialVnode.attrs.workout;
+function WorkoutCard(
+  initialVnode: m.Vnode<TWorkoutCardData>
+): m.Component<TWorkoutCardData> {
+  const { workout } = initialVnode.attrs;
 
   return {
-    view: function (vnode: m.Vnode) {
+    view: function (vnode) {
       return m('li.workout-card', { key: 'workout-index' }, [
         m('p.workout-info', [
           m('span.date', workout.date.toLocaleDateString()),

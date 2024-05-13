@@ -2,17 +2,16 @@ import m from 'mithril';
 import { FullExerciseSerie } from './workoutList';
 
 type TWorkoutDetailsData = {
-  attrs: { exercisesSeries: FullExerciseSerie[] };
+  exercisesSeries: FullExerciseSerie[];
 };
 
 function WorkoutDetails(
-  initialVnode: m.Vnode & TWorkoutDetailsData
-): m.Component {
-  const exercisesSeries: FullExerciseSerie[] =
-    initialVnode.attrs.exercisesSeries;
+  initialVnode: m.Vnode<TWorkoutDetailsData>
+): m.Component<TWorkoutDetailsData> {
+  const { exercisesSeries } = initialVnode.attrs;
 
   return {
-    view: function (vnode: m.Vnode & TWorkoutDetailsData) {
+    view: function (vnode) {
       return m(
         'ol.workout-details',
         exercisesSeries.map((exercise) =>
