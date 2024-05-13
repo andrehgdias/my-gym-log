@@ -2,6 +2,6 @@ import 'normalize.css';
 import './style.css';
 
 import m from 'mithril';
-import WorkoutList from './components/workoutList';
+import HomePage from './pages/home';
 
-m.mount(document.body, WorkoutList);
+m.mount(document.body, HomePage);
