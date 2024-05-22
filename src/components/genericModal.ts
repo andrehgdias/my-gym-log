@@ -7,7 +7,7 @@ export enum ModalStatus {
 
 export type TGenericModalData = {
   handleModal: (status: ModalStatus) => any;
-  dynamicModalContentComponent: m.Component;
+  modalContentComponent: m.ClosureComponent;
   status: ModalStatus;
 };
 
@@ -15,8 +15,7 @@ function GenericModal(
   initialVnode: m.Vnode<TGenericModalData>
 ): m.Component<TGenericModalData> {
   const { handleModal } = initialVnode.attrs;
-  let dynamicModalContentComponent =
-    initialVnode.attrs.dynamicModalContentComponent;
+  let modalContentComponent = initialVnode.attrs.modalContentComponent;
   let status = initialVnode.attrs.status;
 
   return {
@@ -26,12 +25,8 @@ function GenericModal(
         m.redraw(); // Calling redraw because for some reason it wont show at the click event
       }
 
-      if (
-        dynamicModalContentComponent !==
-        newVnode.attrs.dynamicModalContentComponent
-      ) {
-        dynamicModalContentComponent =
-          newVnode.attrs.dynamicModalContentComponent;
+      if (modalContentComponent !== newVnode.attrs.modalContentComponent) {
+        modalContentComponent = newVnode.attrs.modalContentComponent;
       }
     },
     view: function () {
@@ -51,7 +46,7 @@ function GenericModal(
               m('div.overlay', {
                 onclick: () => handleModal(ModalStatus.closed),
               }),
-              m('div.dialog', [m(dynamicModalContentComponent)]),
+              m('div.dialog', [m(modalContentComponent)]),
             ]
           )
         : m('');

@@ -1,9 +1,10 @@
 import m from 'mithril';
 import { ModalStatus } from './genericModal';
+import WorkoutModal from './workoutModal';
 
 export type TActionsBarData = {
   handleModalStatus: (status: ModalStatus) => any;
-  handleModalContent: (modalContentComponent: m.Component) => void;
+  handleModalContent: (modalContentComponent: m.ClosureComponent) => void;
 };
 
 function ActionsBar(
@@ -18,7 +19,7 @@ function ActionsBar(
           'button.btn-light-outline',
           {
             onclick: () => {
-              handleModalContent({ view: () => m('.test', 'ola') });
+              handleModalContent(WorkoutModal);
               handleModalStatus(ModalStatus.open);
             },
           },

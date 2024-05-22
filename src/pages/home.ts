@@ -5,15 +5,13 @@ import GenericModal, { ModalStatus } from '../components/genericModal';
 
 function HomePage(): m.Component {
   let modalStatus = ModalStatus.closed;
-  let dynamicModalContentComponent: m.Component = {
-    view: () => m('.empty', 'empty'),
-  };
+  let dynamicModalContentComponent: m.ClosureComponent = null!;
 
   const handleModalStatus = (status: ModalStatus) => {
     modalStatus = status;
   };
 
-  const handleModalContent = (modalContentComponent: m.Component) => {
+  const handleModalContent = (modalContentComponent: m.ClosureComponent) => {
     dynamicModalContentComponent = modalContentComponent;
   };
 
@@ -28,7 +26,7 @@ function HomePage(): m.Component {
         m(GenericModal, {
           handleModal: handleModalStatus,
           status: modalStatus,
-          dynamicModalContentComponent: dynamicModalContentComponent,
+          modalContentComponent: dynamicModalContentComponent,
         }),
       ]);
     },
