@@ -1,14 +1,15 @@
 import m from 'mithril';
-import { ModalStatus } from './workoutModal';
+import { ModalStatus } from './genericModal';
 
 export type TActionsBarData = {
-  handleModal: (status: ModalStatus) => any;
+  handleModalStatus: (status: ModalStatus) => any;
+  handleModalContent: (modalContentComponent: m.Component) => void;
 };
 
 function ActionsBar(
   initialVnode: m.Vnode<TActionsBarData>
 ): m.Component<TActionsBarData> {
-  const { handleModal } = initialVnode.attrs;
+  const { handleModalStatus, handleModalContent } = initialVnode.attrs;
   return {
     view: function () {
       return m('div.actions-bar', [
@@ -16,7 +17,10 @@ function ActionsBar(
         m(
           'button.btn-light-outline',
           {
-            onclick: () => handleModal(ModalStatus.open),
+            onclick: () => {
+              handleModalContent({ view: () => m('.test', 'ola') });
+              handleModalStatus(ModalStatus.open);
+            },
           },
           'Add Workout'
         ),

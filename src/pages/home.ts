@@ -1,21 +1,35 @@
 import m from 'mithril';
 import WorkoutList from '../components/workoutList';
 import ActionsBar from '../components/actionsBar';
-import WorkoutModal, { ModalStatus } from '../components/workoutModal';
+import GenericModal, { ModalStatus } from '../components/genericModal';
 
 function HomePage(): m.Component {
   let modalStatus = ModalStatus.closed;
+  let dynamicModalContentComponent: m.Component = {
+    view: () => m('.empty', 'empty'),
+  };
 
-  const handleModal = (status: ModalStatus) => {
+  const handleModalStatus = (status: ModalStatus) => {
     modalStatus = status;
+  };
+
+  const handleModalContent = (modalContentComponent: m.Component) => {
+    dynamicModalContentComponent = modalContentComponent;
   };
 
   return {
     view: function (vnode) {
       return m('main', [
-        m(ActionsBar, { handleModal }),
+        m(ActionsBar, {
+          handleModalStatus,
+          handleModalContent,
+        }),
         m(WorkoutList),
-        m(WorkoutModal, { handleModal, status: modalStatus }),
+        m(GenericModal, {
+          handleModal: handleModalStatus,
+          status: modalStatus,
+          dynamicModalContentComponent: dynamicModalContentComponent,
+        }),
       ]);
     },
   };
