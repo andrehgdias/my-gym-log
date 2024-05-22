@@ -14,7 +14,6 @@
   background-color: transparent;
   color: #fff;
   padding: 1rem 1.15rem;
-  margin: 0.5rem;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -54,4 +53,26 @@
 .workout-title {
   font-size: 1.7rem;
   margin: 0.3rem 0 1rem;
+}
+
+.workout-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.workout-modal .overlay {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(32, 32, 32, 0.7);
+}
+
+.workout-modal .dialog {
+  position: absolute;
+  min-width: 400px;
+  min-height: 400px;
+  background-color: #fff;
+  border-radius: 5px;
 }
