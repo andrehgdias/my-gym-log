@@ -46,7 +46,16 @@ function GenericModal(
               m('div.overlay', {
                 onclick: () => handleModal(ModalStatus.closed),
               }),
-              m('div.dialog', [m(modalContentComponent)]),
+              m('div.dialog', [
+                m(
+                  'button.close-modal',
+                  {
+                    onclick: () => handleModal(ModalStatus.closed),
+                  },
+                  'x'
+                ),
+                m(modalContentComponent),
+              ]),
             ]
           )
         : m('');
