@@ -18,7 +18,10 @@ function WorkoutCard(
           m('span.date', workout.date),
           m('span.duration', `${workout.duration} min`),
         ]),
-        m('h2.workout-title', workout.exercisesSeries[0].exerciseClass),
+        m(
+          'h2.workout-title',
+          workout.exercisesSeries[0]?.exerciseClass ?? 'Empty workout'
+        ),
         m(WorkoutDetails, { exercisesSeries: workout.exercisesSeries }),
       ]);
     },
