@@ -24,61 +24,18 @@ export interface Workout {
   exercisesSeries: FullExerciseSerie[];
 }
 
-const mockWorkouts: Workout[] = [
-  {
-    date: new Date(),
-    duration: 50,
-    exercisesSeries: [
-      {
-        exerciseName: 'Dumbell Curls',
-        exerciseClass: 'Biceps',
-        series: [
-          {
-            weight: 8,
-            reps: 10,
-            unit: MeasurementUnit.kg,
-          },
-          {
-            weight: 8,
-            reps: 9,
-            unit: MeasurementUnit.kg,
-          },
-          {
-            weight: 8,
-            reps: 8,
-            unit: MeasurementUnit.kg,
-          },
-        ],
-      },
-      {
-        exerciseName: 'Scott Curl',
-        exerciseClass: 'Biceps',
-        series: [
-          {
-            weight: 15,
-            reps: 10,
-            unit: MeasurementUnit.kg,
-          },
-          {
-            weight: 15,
-            reps: 10,
-            unit: MeasurementUnit.kg,
-          },
-          {
-            weight: 15,
-            reps: 8,
-            unit: MeasurementUnit.kg,
-          },
-        ],
-      },
-    ],
-  },
-];
-
 function WorkoutList(): m.Component {
-  const workouts: Workout[] = mockWorkouts;
+  let workouts: Workout[] = [];
 
   return {
+    oninit: function () {
+      m.request({
+        method: 'GET',
+        url: 'http://localhost:3000/workouts',
+      }).then(function (result: Workout[]) {
+        workouts = result;
+      });
+    },
     view: function () {
       return m(
         'ul.workout-list',

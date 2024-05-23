@@ -15,7 +15,7 @@ function WorkoutCard(
     view: function (vnode) {
       return m('li.workout-card', { key: 'workout-index' }, [
         m('p.workout-info', [
-          m('span.date', workout.date.toLocaleDateString()),
+          m('span.date', workout.date),
           m('span.duration', `${workout.duration} min`),
         ]),
         m('h2.workout-title', workout.exercisesSeries[0].exerciseClass),
