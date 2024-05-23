@@ -7,7 +7,15 @@ function WorkoutModal(): m.Component {
         m('h1', 'New Workout'),
         m('div.input-wrapper', [
           m('label', { for: 'date' }, 'Date'),
-          m('input[type=date]', { id: 'date', required: true }, 'New Workout'),
+          m(
+            'input[type=date]',
+            {
+              id: 'date',
+              max: new Date().toISOString().split('T')[0],
+              required: true,
+            },
+            'New Workout'
+          ),
         ]),
         m('div.input-wrapper', [
           m('label', { for: 'duration' }, 'Duration (min)'),
