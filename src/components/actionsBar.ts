@@ -3,14 +3,14 @@ import { ModalStatus } from './genericModal';
 import WorkoutModal from './workoutModal';
 
 export type TActionsBarData = {
-  handleModalStatus: (status: ModalStatus) => any;
-  handleModalContent: (modalContentComponent: m.ClosureComponent) => void;
+  setModalStatus: (status: ModalStatus) => any;
+  setModalContent: (modalContentComponent: m.ClosureComponent) => void;
 };
 
 function ActionsBar(
   initialVnode: m.Vnode<TActionsBarData>
 ): m.Component<TActionsBarData> {
-  const { handleModalStatus, handleModalContent } = initialVnode.attrs;
+  const { setModalStatus, setModalContent } = initialVnode.attrs;
   return {
     view: function () {
       return m('div.actions-bar', [
@@ -19,8 +19,8 @@ function ActionsBar(
           'button.btn-light-outline',
           {
             onclick: () => {
-              handleModalContent(WorkoutModal);
-              handleModalStatus(ModalStatus.open);
+              setModalContent(WorkoutModal);
+              setModalStatus(ModalStatus.open);
             },
           },
           'Add Workout'

@@ -7,11 +7,11 @@ function HomePage(): m.Component {
   let modalStatus = ModalStatus.closed;
   let dynamicModalContentComponent: m.ClosureComponent = null!;
 
-  const handleModalStatus = (status: ModalStatus) => {
+  const setModalStatus = (status: ModalStatus) => {
     modalStatus = status;
   };
 
-  const handleModalContent = (modalContentComponent: m.ClosureComponent) => {
+  const setModalContent = (modalContentComponent: m.ClosureComponent) => {
     dynamicModalContentComponent = modalContentComponent;
   };
 
@@ -19,12 +19,12 @@ function HomePage(): m.Component {
     view: function (vnode) {
       return m('main', [
         m(ActionsBar, {
-          handleModalStatus,
-          handleModalContent,
+          setModalStatus: setModalStatus,
+          setModalContent: setModalContent,
         }),
         m(WorkoutList),
         m(GenericModal, {
-          handleModal: handleModalStatus,
+          setModalStatus: setModalStatus,
           status: modalStatus,
           modalContentComponent: dynamicModalContentComponent,
         }),

@@ -6,7 +6,7 @@ export enum ModalStatus {
 }
 
 export type TGenericModalData = {
-  handleModal: (status: ModalStatus) => any;
+  setModalStatus: (status: ModalStatus) => any;
   modalContentComponent: m.ClosureComponent;
   status: ModalStatus;
 };
@@ -14,7 +14,7 @@ export type TGenericModalData = {
 function GenericModal(
   initialVnode: m.Vnode<TGenericModalData>
 ): m.Component<TGenericModalData> {
-  const { handleModal } = initialVnode.attrs;
+  const { setModalStatus } = initialVnode.attrs;
   let modalContentComponent = initialVnode.attrs.modalContentComponent;
   let status = initialVnode.attrs.status;
 
@@ -38,19 +38,19 @@ function GenericModal(
                 console.log('🚀 ~ event.key:', event.key);
                 if (event.key === 'Escape') {
                   console.log('Escape');
-                  handleModal(ModalStatus.closed);
+                  setModalStatus(ModalStatus.closed);
                 }
               },
             },
             [
               m('div.overlay', {
-                onclick: () => handleModal(ModalStatus.closed),
+                onclick: () => setModalStatus(ModalStatus.closed),
               }),
               m('div.dialog', [
                 m(
                   'button.close-modal',
                   {
-                    onclick: () => handleModal(ModalStatus.closed),
+                    onclick: () => setModalStatus(ModalStatus.closed),
                   },
                   'x'
                 ),
