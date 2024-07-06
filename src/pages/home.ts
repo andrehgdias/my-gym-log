@@ -1,30 +1,35 @@
-import m from 'mithril';
+import m, {ClosureComponent, Component } from 'mithril';
 import WorkoutList from '../components/workoutList';
 import ActionsBar from '../components/actionsBar';
-import GenericModal, { ModalStatus } from '../components/genericModal';
+import GenericModal, {
+  ModalStatus,
+  ModalContentComponentAttrs,
+} from '../components/genericModal';
 
-function HomePage(): m.Component {
+function HomePage(): Component {
   let modalStatus = ModalStatus.closed;
-  let dynamicModalContentComponent: m.ClosureComponent = null!;
+  let dynamicModalContentComponent: ClosureComponent<ModalContentComponentAttrs> | undefined = undefined;
 
   const setModalStatus = (status: ModalStatus) => {
     modalStatus = status;
   };
 
-  const setModalContent = (modalContentComponent: m.ClosureComponent) => {
+  const setModalContent = (
+    modalContentComponent: ClosureComponent<ModalContentComponentAttrs>
+  ) => {
     dynamicModalContentComponent = modalContentComponent;
   };
 
   return {
-    view: function (vnode) {
+    view: function () {
       return m('main', [
         m(ActionsBar, {
-          setModalStatus: setModalStatus,
-          setModalContent: setModalContent,
+          setModalStatus,
+          setModalContent,
         }),
         m(WorkoutList),
         m(GenericModal, {
-          setModalStatus: setModalStatus,
+          setModalStatus,
           status: modalStatus,
           modalContentComponent: dynamicModalContentComponent,
         }),

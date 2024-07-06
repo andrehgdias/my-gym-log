@@ -1,4 +1,4 @@
-import m from 'mithril';
+import m, {Component, request} from 'mithril';
 import WorkoutCard from './workoutCard';
 
 export enum MeasurementUnit {
@@ -19,20 +19,20 @@ export interface FullExerciseSerie {
 }
 
 export interface Workout {
-  date: Date;
+  date: string;
   duration: number;
   exercisesSeries: FullExerciseSerie[];
 }
 
-function WorkoutList(): m.Component {
+function WorkoutList(): Component {
   let workouts: Workout[] = [];
 
   return {
     oninit: function () {
-      m.request({
+      request<Workout[]>({
         method: 'GET',
         url: 'http://localhost:3000/workouts',
-      }).then(function (result: Workout[]) {
+      }).then(function (result) {
         workouts = result;
       });
     },

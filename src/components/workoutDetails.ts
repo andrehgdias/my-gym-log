@@ -1,17 +1,17 @@
 import m from 'mithril';
 import { FullExerciseSerie } from './workoutList';
 
-type TWorkoutDetailsData = {
+interface WorkoutDetailsAttrs {
   exercisesSeries: FullExerciseSerie[];
-};
+}
 
 function WorkoutDetails(
-  initialVnode: m.Vnode<TWorkoutDetailsData>
-): m.Component<TWorkoutDetailsData> {
+  initialVnode: m.Vnode<WorkoutDetailsAttrs>
+): m.Component<WorkoutDetailsAttrs> {
   const { exercisesSeries } = initialVnode.attrs;
 
   return {
-    view: function (vnode) {
+    view: function () {
       return m(
         'ol.workout-details',
         exercisesSeries.map((exercise) =>

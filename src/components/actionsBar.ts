@@ -1,29 +1,31 @@
-import m from 'mithril';
-import { ModalStatus } from './genericModal';
-import WorkoutModal from './workoutModal';
+import m, { ClosureComponent, Component, Vnode } from "mithril";
+import { ModalStatus, ModalContentComponentAttrs } from "./genericModal";
+import WorkoutModal from "./workoutModal";
 
-export type TActionsBarData = {
-  setModalStatus: (status: ModalStatus) => any;
-  setModalContent: (modalContentComponent: m.ClosureComponent) => void;
-};
+export interface ActionsBarAttrs {
+  setModalStatus: (status: ModalStatus) => void;
+  setModalContent: (
+    modalContentComponent: ClosureComponent<ModalContentComponentAttrs>,
+  ) => void;
+}
 
 function ActionsBar(
-  initialVnode: m.Vnode<TActionsBarData>
-): m.Component<TActionsBarData> {
+  initialVnode: Vnode<ActionsBarAttrs>,
+): Component<ActionsBarAttrs> {
   const { setModalStatus, setModalContent } = initialVnode.attrs;
   return {
     view: function () {
-      return m('div.actions-bar', [
-        m('h1.logo', 'My-Gym-Log'),
+      return m("div.actions-bar", [
+        m("h1.logo", "My-Gym-Log"),
         m(
-          'button.btn-light-outline',
+          "button.btn-light-outline",
           {
             onclick: () => {
               setModalContent(WorkoutModal);
               setModalStatus(ModalStatus.open);
             },
           },
-          'Add Workout'
+          "Add Workout",
         ),
       ]);
     },

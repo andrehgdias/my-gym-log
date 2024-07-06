@@ -16,6 +16,9 @@ devDependencies:
   '@types/mithril':
     specifier: ^2.2.6
     version: 2.2.6
+  prettier:
+    specifier: ^3.3.2
+    version: 3.3.2
   typescript:
     specifier: ^5.2.2
     version: 5.4.5
@@ -500,6 +503,12 @@ packages:
       nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.2.0
+    dev: true
+
+  /prettier@3.3.2:
+    resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /rollup@4.17.2:

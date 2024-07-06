@@ -1,21 +1,21 @@
-import m from 'mithril';
+import m, {Component, Vnode} from 'mithril';
 import WorkoutDetails from './workoutDetails';
 import { Workout } from './workoutList';
 
-type TWorkoutCardData = {
+interface WorkoutCardAttrs {
   workout: Workout;
-};
+}
 
 function WorkoutCard(
-  initialVnode: m.Vnode<TWorkoutCardData>
-): m.Component<TWorkoutCardData> {
+  initialVnode: Vnode<WorkoutCardAttrs>
+): Component<WorkoutCardAttrs> {
   const { workout } = initialVnode.attrs;
 
   return {
-    view: function (vnode) {
+    view: function () {
       return m('li.workout-card', { key: 'workout-index' }, [
         m('p.workout-info', [
-          m('span.date', workout.date),
+          m('span.date', new Date(workout.date).toLocaleDateString()),
           m('span.duration', `${workout.duration} min`),
         ]),
         m(

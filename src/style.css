@@ -22,6 +22,20 @@
   background-color: rgb(87, 87, 87);
 }
 
+.btn-confirm {
+  border: 2px solid rgb(32, 32, 32);
+  border-radius: 5px;
+  background-color: rgb(32, 32, 32);
+  color: #fff;
+  padding: 1rem 1.15rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-confirm:hover {
+  transform: scale(1.05);
+}
+
 .actions-bar {
   background-color: rgb(32, 32, 32);
   min-height: 50px;
@@ -56,14 +70,15 @@
 }
 
 .generic-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .generic-modal .overlay {
-  position: absolute;
-  top: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(32, 32, 32, 0.7);
