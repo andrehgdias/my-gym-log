@@ -66,6 +66,12 @@
       "date": "Sat, 06 Jul 2024 10:20:10 GMT",
       "duration": 75,
       "exercisesSeries": []
+    },
+    {
+      "id": "83f7",
+      "date": "2024-07-05T00:00:00.000Z",
+      "duration": 33,
+      "exercisesSeries": []
     }
   ]
 }

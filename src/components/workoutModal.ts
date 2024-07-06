@@ -2,11 +2,6 @@ import m, { Component, request, Vnode } from "mithril";
 import { Workout } from "./workoutList";
 import { ModalContentComponentAttrs } from "./genericModal";
 
-function fixDate(date: Date) {
-  date.setDate(date.getDate() + 1);
-  return new Date(date);
-}
-
 function WorkoutModal(
   initialVnode: Vnode<ModalContentComponentAttrs>,
 ): Component<ModalContentComponentAttrs> {
@@ -27,13 +22,11 @@ function WorkoutModal(
             {
               id: "date",
               max: new Date().toISOString().split("T")[0],
-              value: fixDate(new Date(currentWorkout.date))
-                .toISOString()
-                .split("T")[0],
+              value: new Date(currentWorkout.date).toISOString().split("T")[0],
               onchange: (event: Event) => {
                 currentWorkout.date = new Date(
                   (event.target as HTMLInputElement).value,
-                ).toUTCString();
+                ).toISOString();
               },
               required: true,
             },

@@ -1,9 +1,9 @@
-import m, {Component, request} from 'mithril';
-import WorkoutCard from './workoutCard';
+import m, { Component, request } from "mithril";
+import WorkoutCard from "./workoutCard";
 
 export enum MeasurementUnit {
-  kg = 'kg',
-  lb = 'lb',
+  kg = "kg",
+  lb = "lb",
 }
 
 export interface ExerciseSerie {
@@ -30,16 +30,18 @@ function WorkoutList(): Component {
   return {
     oninit: function () {
       request<Workout[]>({
-        method: 'GET',
-        url: 'http://localhost:3000/workouts',
+        method: "GET",
+        url: "http://localhost:3000/workouts",
       }).then(function (result) {
-        workouts = result;
+        workouts = result.sort((a, b) => {
+          return new Date(b.date).valueOf() - new Date(a.date).valueOf();
+        });
       });
     },
     view: function () {
       return m(
-        'ul.workout-list',
-        workouts.map((workout) => m(WorkoutCard, { workout }))
+        "ul.workout-list",
+        workouts.map((workout) => m(WorkoutCard, { workout })),
       );
     },
   };
