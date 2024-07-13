@@ -1,12 +1,7 @@
 {
   "workouts": [
     {
-      "date": "2024-05-21T17:18:27.993Z",
-      "duration": 45,
-      "exercisesSeries": [],
-      "id": "36b3"
-    },
-    {
+      "id": "508cb86c-26a9-4e1c-9032-43f3648d4cf3",
       "date": "2024-05-22T17:18:27.993Z",
       "duration": 50,
       "exercisesSeries": [
@@ -52,26 +47,7 @@
             }
           ]
         }
-      ],
-      "id": "02db"
-    },
-    {
-      "id": "37c4",
-      "date": "Thu, 23 May 2024 19:22:36 GMT",
-      "duration": 30,
-      "exercisesSeries": []
-    },
-    {
-      "id": "9bf7",
-      "date": "Sat, 06 Jul 2024 10:20:10 GMT",
-      "duration": 75,
-      "exercisesSeries": []
-    },
-    {
-      "id": "83f7",
-      "date": "2024-07-05T00:00:00.000Z",
-      "duration": 33,
-      "exercisesSeries": []
+      ]
     }
   ]
 }
