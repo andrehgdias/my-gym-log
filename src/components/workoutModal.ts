@@ -1,11 +1,13 @@
 import m, { Component, request, Vnode } from "mithril";
-import { Workout } from "./workoutList";
+import { v4 as uuidv4 } from "uuid";
 import { ModalContentComponentAttrs } from "./genericModal";
+import { Workout } from "../pages/home.ts";
 
 function WorkoutModal(
   initialVnode: Vnode<ModalContentComponentAttrs>,
 ): Component<ModalContentComponentAttrs> {
   let currentWorkout: Workout = {
+    id: uuidv4(),
     date: new Date().toUTCString(),
     duration: 30,
     exercisesSeries: [],
@@ -24,9 +26,8 @@ function WorkoutModal(
               max: new Date().toISOString().split("T")[0],
               value: new Date(currentWorkout.date).toISOString().split("T")[0],
               onchange: (event: Event) => {
-                currentWorkout.date = new Date(
-                  (event.target as HTMLInputElement).value,
-                ).toISOString();
+                const dateInput = event.target as HTMLInputElement;
+                currentWorkout.date = dateInput.valueAsDate!.toISOString();
               },
               required: true,
             },
@@ -57,10 +58,12 @@ function WorkoutModal(
                 method: "POST",
                 url: "http://localhost:3000/workouts",
                 body: currentWorkout,
-              }).then(function (result) {
-                console.info("[WorkoutModal] POST Result: ", result);
-                initialVnode.attrs.closeModal();
-              });
+              })
+                .then(function (result) {
+                  console.info("[WorkoutModal] POST Result: ", result);
+                  initialVnode.attrs.closeModal();
+                })
+                .finally(initialVnode.attrs.fetchWorkouts);
             },
           },
           "Confirm",

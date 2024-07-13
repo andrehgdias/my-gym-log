@@ -1,5 +1,6 @@
-import m, { Component, request } from "mithril";
+import m, { Component, Vnode } from "mithril";
 import WorkoutCard from "./workoutCard";
+import { Workout } from "../pages/home.ts";
 
 export enum MeasurementUnit {
   kg = "kg",
@@ -18,30 +19,18 @@ export interface FullExerciseSerie {
   series: ExerciseSerie[];
 }
 
-export interface Workout {
-  date: string;
-  duration: number;
-  exercisesSeries: FullExerciseSerie[];
+export interface WorkoutListAttrs {
+  workouts: Workout[];
 }
 
-function WorkoutList(): Component {
-  let workouts: Workout[] = [];
-
+function WorkoutList(): Component<WorkoutListAttrs> {
   return {
-    oninit: function () {
-      request<Workout[]>({
-        method: "GET",
-        url: "http://localhost:3000/workouts",
-      }).then(function (result) {
-        workouts = result.sort((a, b) => {
-          return new Date(b.date).valueOf() - new Date(a.date).valueOf();
-        });
-      });
-    },
-    view: function () {
+    view: function (vnode: Vnode<WorkoutListAttrs>) {
       return m(
         "ul.workout-list",
-        workouts.map((workout) => m(WorkoutCard, { workout })),
+        vnode.attrs.workouts.map((workout) =>
+          m(WorkoutCard, { workout, key: workout.id }),
+        ),
       );
     },
   };

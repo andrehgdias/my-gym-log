@@ -10,12 +10,14 @@
   },
   "devDependencies": {
     "@types/mithril": "^2.2.6",
+    "@types/uuid": "^10.0.0",
     "prettier": "^3.3.2",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   },
   "dependencies": {
     "mithril": "^2.2.2",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "uuid": "^10.0.0"
   }
 }

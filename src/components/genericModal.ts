@@ -7,10 +7,12 @@ export enum ModalStatus {
 
 export interface ModalContentComponentAttrs {
   closeModal: () => void;
+  fetchWorkouts: () => void;
 }
 
 export interface GenericModalAttrs {
   setModalStatus: (status: ModalStatus) => void;
+  fetchWorkouts: () => void;
   modalContentComponent:
     | ClosureComponent<ModalContentComponentAttrs>
     | undefined;
@@ -20,19 +22,13 @@ export interface GenericModalAttrs {
 function GenericModal(
   initialVnode: Vnode<GenericModalAttrs>,
 ): Component<GenericModalAttrs> {
-  const { setModalStatus } = initialVnode.attrs;
+  const { setModalStatus, fetchWorkouts } = initialVnode.attrs;
   let { modalContentComponent, status } = initialVnode.attrs;
 
   const closeModal = () => setModalStatus(ModalStatus.closed);
 
   return {
     onupdate: function (newVnode) {
-      console.info("[GenericModal] Current State: ", {
-        setModalStatus,
-        status,
-        modalContentComponent,
-      });
-      console.info("[GenericModal] New Attrs: ", newVnode.attrs);
       let shouldRedraw = false;
 
       if (status !== newVnode.attrs.status) {
@@ -61,7 +57,11 @@ function GenericModal(
                 },
                 "x",
               ),
-              modalContentComponent && m(modalContentComponent, { closeModal }),
+              modalContentComponent &&
+                m(modalContentComponent, {
+                  closeModal,
+                  fetchWorkouts,
+                }),
             ]),
           ])
         : null;
