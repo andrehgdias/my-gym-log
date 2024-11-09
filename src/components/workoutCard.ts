@@ -1,6 +1,5 @@
 import m, { Component, Vnode } from "mithril";
 import WorkoutDetails from "./workoutDetails";
-
 import { Workout } from "../pages/home.ts";
 
 interface WorkoutCardAttrs {
@@ -14,10 +13,16 @@ function WorkoutCard(
 
   return {
     view: function () {
-      return m("li.workout-card", { key: "workout-index" }, [
-        m("p.workout-info", [
-          m("span.date", new Date(workout.date).toLocaleDateString()),
-          m("span.duration", `${workout.duration} min`),
+      return m("li.workout-card", [
+        m(".workout-card-header", [
+          m("p.workout-info", [
+            m("span.date", new Date(workout.date).toLocaleDateString()),
+            m("span.duration", `${workout.duration} min`),
+          ]),
+          m(
+            "button.btn-more-options",
+            m("img", { src: "/images/icons/ellipsis-reg.svg" }),
+          ),
         ]),
         m(
           "h2.workout-title",

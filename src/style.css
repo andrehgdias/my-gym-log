@@ -58,6 +58,11 @@
   border-radius: 5px;
 }
 
+.workout-card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .workout-info {
   display: inline-flex;
   gap: 1rem;
@@ -128,4 +133,21 @@ button.close-modal {
   border-radius: 5px;
   font-size: 1.15rem;
   width: 100%;
+}
+
+.btn-more-options {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 25px;
+  height: 25px;
+  border: transparent;
+  border-radius: 100%;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.2s linear;
+}
+
+.btn-more-options:hover {
+  transform: scale(1.3);
 }
